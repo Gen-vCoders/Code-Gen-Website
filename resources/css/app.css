@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primaryColor: #DA3F3F;
+  --secondaryColor: #04012B;
+  --paraColor: #848493;
+  --white: #ffffff;
+  --sectionHeading: "Bruno Ace SC", sans-serif;
+  --bodyFont: "Roboto", sans-serif;
+  --poppinsfont: 'Poppins', sans-serif;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--poppinsfont);
+  font-weight: 700;
+}
+
+body {
+  font-family: var(--bodyFont);
+}
+
+p {
+  color: var(--paraColor);
+  line-height: 28px;
+}
+
+.border_btn {
+  background: linear-gradient(var(--primaryColor) 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+  transition: 0.4s, background-position 0s !important;
+  border: 1px solid var(--primaryColor) !important;
+  color: var(--primaryColor) !important;
+}
+
+.border_btn:hover {
+  --p: 100%;
+  color: #fff !important;
+}
+
+.red_btn {
+  background-color: var(--primaryColor) !important;
+  color: var(--white) !important;
+  border: 1px solid var(--primaryColor) !important;
+  background: linear-gradient(var(--secondaryColor) 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+  transition: 0.4s, background-position 0s !important;
+}
+
+.red_btn:hover {
+  --p: 100%;
+  color: #fff;
+}
+
+.btn {
+  padding: 10px 28px 11px 28px !important;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+:hover {
+  transition: all ease-in-out 0.3s;
+}
+
+.sec {
+  padding: 60px 0;
+}
+
+.section-title .title-tag {
+  color: var(--primaryColor);
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.section-title .title {
+  font-size: 46px;
+  font-weight: 700;
+  position: relative;
+  color: var(--secondaryColor);
+  font-family: var(--sectionHeading);
+}
+
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--secondaryColor);
+  bottom: -11px;
+  left: calc(50% - 20px);
+}
+
+.section-title h2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: var(--primaryColor);
+  bottom: -10px;
+  left: calc(50% - 60px);
+}
+
+/* home page start */
+
+/* animation using key frame */
+
+/* up down animation */
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
