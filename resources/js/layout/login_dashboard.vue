@@ -1,53 +1,34 @@
 <template>
-    <!-- ======= Contact us Section Start ======= -->
     <section id="contactus_section" class="sec">
         <div class="container">
             <div class="section-title text-center mb-30">
-                <h2 class="title">Contact Us</h2>
+                <h2 class="title">Login</h2>
             </div>
             <div class="row justify-content-center my-5 py-5">
                 <div class="col-lg-5 mt-5 p-5 border-end d-flex algn-items-center justify-content-center flex-column">
                     <div class="form_heading mb-4">
-                        <h3>Send us a message</h3>
+                        <h3>Login For dashboard</h3>
                     </div>
                     <form @submit.prevent="submitForm" class="contact_form w-100">
-                        <div class="d-flex gap-3">
-                            <div class="form-floating w-100">
-                                <input v-model="formData.name" type="text" name="name" class="form-control" id="name"
-                                    placeholder="enter name">
-                                <label for="name">Name</label>
-                                <div class="error-message bg-danger badge" v-show="formErrorName">{{ formErrorName }}
-                                </div>
-                            </div>
-
-                            <div class="form-floating w-100">
-                                <input v-model="formData.email" type="email" class="form-control" name="email"
-                                    id="email" placeholder="enter email">
-                                <label for="email">Email</label>
-                                <div class="error-message bg-danger badge" v-show="formErrorEmail">{{ formErrorEmail }}
-                                </div>
+                        <div class="form-floating w-100">
+                            <input v-model="formData.email" type="email" class="form-control" name="email" id="email"
+                                placeholder="enter email">
+                            <label for="email">Email</label>
+                            <div class="error-message bg-danger badge" v-show="formErrorEmail">{{ formErrorEmail }}
                             </div>
                         </div>
                         <div class="form-floating mt-3">
-                            <input v-model="formData.phone" type="text" class="form-control" name="phone" id="phone"
-                                placeholder="enter phone no">
-                            <label for="phone">Phone no</label>
-                            <div class="error-message bg-danger badge" v-show="formErrorPhone">{{ formErrorPhone }}
+                            <input v-model="formData.password" type="password" class="form-control" name="password"
+                                id="password" placeholder="enter Password">
+                            <label for="phone">Password</label>
+                            <div class="error-message bg-danger badge" v-show="formErrorPassword">{{ formErrorPassword
+                                }}
                             </div>
-                        </div>
-                        <div class="form-floating mt-3">
-                            <textarea v-model="formData.message" class="form-control" name="message" id="message"
-                                rows="10" placeholder="enter message"></textarea>
-                            <label for="message">Message</label>
-                        </div>
-                        <div class="my-3">
-                            <div class="sent-message badge bg-success" v-show="formSuccess">Your message has been
-                                sent. Thank you!</div>
                         </div>
                         <div class="linkWrap">
                             <button type="submit" class="style-25">
                                 <span class="wrap">
-                                    <div class="text" data-text="Send">Send Us</div>
+                                    <div class="text" data-text="Login">Login</div>
                                 </span>
                             </button>
                         </div>
@@ -69,56 +50,65 @@ export default {
     data() {
         return {
             formData: {
-                name: '',
                 email: '',
-                phone: '',
-                message: ''
+                password: '',
             },
-            formErrorName: '',
             formErrorEmail: '',
-            formErrorPhone: '',
+            formErrorPassword: '',
             formSuccess: false
         };
     },
     methods: {
         async submitForm() {
             try {
-                // Validate form fields
-                if (!this.formData.name) {
-                    this.formErrorName = 'Name is required';
-                    this.formSuccess = false;
-                    return;
-                }
                 if (!this.formData.email) {
                     this.formErrorEmail = 'Email is required';
                     this.formSuccess = false;
-                    return;
                 }
-                if (!this.formData.phone) {
-                    this.formErrorPhone = 'Phone is required';
+                if (!this.formData.password) {
+                    this.formErrorPassword = 'Password is required';
                     this.formSuccess = false;
                     return;
                 }
-
-                this.formErrorName = '';
                 this.formErrorEmail = '';
-                this.formErrorPhone = '';
+                this.formErrorPassword = '';
 
-                await axios.post('/submit-form', this.formData);
+                console.log(this.formData);
+                try {
+                    const response = await axios.post('/login-admin', this.formData);
+                    console.log('Success:', response.data.message);
+                    if (response.data.message == "Login Sucessfully") {
+                        const toast = useToast();
+                        toast.open({
+                            message: 'Message Sent Successfully!!',
+                            type: 'success',
+                            duration: 2000,
+                        });
 
-                const toast = useToast();
-                toast.open({
-                    message: 'Message Sent Successfully!!',
-                    type: 'success',
-                    duration: 2000,
-                });
+                        this.formData = {
+                            name: '',
+                            email: '',
+                            phone: '',
+                            message: ''
+                        };
 
-                this.formData = {
-                    name: '',
-                    email: '',
-                    phone: '',
-                    message: ''
-                };
+                        this.$router.push({ name: 'dashboardHome' });
+                    } else {
+                        alert('something went wrong');
+                    }
+                } catch (error) {
+                    const toast = useToast();
+                    let problem = error;
+                    toast.open({
+                        message: problem,
+                        type: 'error',
+                        duration: 2000,
+                    });
+
+                }
+
+
+
             } catch (error) {
                 const toast = useToast();
                 toast.open({

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContactFormController;
 use App\Http\Controllers\SubmissionForm;
 
 /*
@@ -14,8 +15,15 @@ use App\Http\Controllers\SubmissionForm;
 |
 */
 
-Route::get('/', function () {
+// web.php
+Route::get('/{any}', function () {
     return view('welcome');
-});
+})->where('any', '.*');
 
-// Route::get('/', [SubmissionForm::class, 'showForm'])->name('form');
+// Route::get('/login-admin', function () {
+//     return view('login_dashboard');
+// });
+
+
+Route::post('/submit-form', [ContactFormController::class, 'submitForm']);
+Route::post('/login-admin', [ContactFormController::class, 'loginForm']);

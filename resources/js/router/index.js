@@ -4,6 +4,8 @@ import Home from "../layout/HomePage.vue";
 import Services from "../layout/ServicesPage.vue";
 import ContactUs from "../layout/ContactUsPage.vue";
 import AboutUs from "../layout/AboutUsPage.vue";
+import login from "../layout/login_dashboard.vue";
+import dashboardHome from "../dashboard/home.vue";
 
 const routes = [
     // { path: "/", component: login },
@@ -26,6 +28,16 @@ const routes = [
         path: "/about-us",
         name: "AboutUs",
         component: AboutUs,
+    },
+    {
+        path: "/login-admin",
+        name: "login",
+        component: login,
+    },
+    {
+        path: "/dashbord-home",
+        name: "dashboardHome",
+        component: dashboardHome,
     },
 ];
 
